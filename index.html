@@ -236,6 +236,7 @@
   .m-section{margin-top:30px}
   .m-section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px}
   .m-section-head h4{font-family:"Hanken Grotesk",sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  .m-when{text-transform:none;font-weight:500;letter-spacing:0;color:var(--ink-faint)}
   .m-amount{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(26px,3.4vw,38px);line-height:1;color:var(--copper);font-variant-numeric:tabular-nums}
   table.budget{width:100%;border-collapse:collapse}
   .budget th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:0 0 10px;border-bottom:1px solid var(--line)}
@@ -349,7 +350,7 @@
 
         <div class="m-section">
           <div class="m-section-head">
-            <h4>Monthly Recurring</h4>
+            <h4>Monthly Recurring <span class="m-when">(Starting January 2027)</span></h4>
             <span class="m-amount">$1,950<span style="font-size:.4em;color:var(--ink-faint);font-family:'Hanken Grotesk',sans-serif;letter-spacing:.05em">/mo</span></span>
           </div>
           <table class="budget">
