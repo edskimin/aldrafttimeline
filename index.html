@@ -327,6 +327,7 @@
       render(i);
       detailWrap.classList.remove('closed');
     }
+    updateControls();
   }
 
   function applyReveal(){
@@ -337,24 +338,41 @@
       s.setAttribute('aria-hidden', hidden);
       s.tabIndex = hidden ? -1 : 0;
     });
-    hideAllBtn.disabled = revealed === 0;
-    nextBtn.disabled = revealed >= phases.length;
-    showAllBtn.disabled = revealed >= phases.length;
     // bring in week ticks as cards appear (each card adds its right-edge tick)
     [...ruler.children].forEach((el,t)=>{
       el.classList.toggle('shown', revealed > 0 && t <= revealed);
     });
     // close detail if its block is no longer visible
     if(active !== null && active >= revealed) setActive(null);
+    updateControls();
+  }
+
+  function updateControls(){
+    hideAllBtn.disabled = (revealed === 0 && active === null);
+    showAllBtn.disabled = (revealed >= phases.length);
+    // Reveal next runs out only after all blocks AND the last detail are shown
+    nextBtn.disabled = (revealed >= phases.length && active === phases.length - 1);
+  }
+
+  function advance(){
+    if(revealed < phases.length){ revealed++; applyReveal(); }      // reveal blocks first
+    else { const next = (active === null) ? 0 : active + 1;          // then step through details
+           if(next < phases.length) setActive(next); }
+  }
+
+  function retreat(){
+    if(revealed >= phases.length && active !== null){
+      if(active > 0) setActive(active - 1); else setActive(null);
+    } else if(revealed > 0){ revealed--; applyReveal(); }
   }
 
   hideAllBtn.addEventListener('click', ()=>{ revealed = 0; setActive(null); applyReveal(); });
-  nextBtn.addEventListener('click', ()=>{ if(revealed < phases.length){ revealed++; applyReveal(); } });
+  nextBtn.addEventListener('click', advance);
   showAllBtn.addEventListener('click', ()=>{ revealed = phases.length; applyReveal(); });
 
   document.addEventListener('keydown', (e)=>{
-    if(e.key === 'ArrowRight'){ if(revealed < phases.length){ revealed++; applyReveal(); } }
-    else if(e.key === 'ArrowLeft'){ if(revealed > 0){ revealed--; applyReveal(); } }
+    if(e.key === 'ArrowRight'){ e.preventDefault(); advance(); }
+    else if(e.key === 'ArrowLeft'){ e.preventDefault(); retreat(); }
     else if(e.key === 'Escape'){ if(active !== null){ setActive(null); } else { revealed = phases.length; applyReveal(); } }
   });
 
