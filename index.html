@@ -47,7 +47,7 @@
     content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.05;mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-  .wrap{max-width:1120px;margin:0 auto;padding:clamp(40px,7vw,96px) clamp(22px,5vw,64px) 96px}
+  .wrap{max-width:min(1680px,92vw);margin:0 auto;padding:clamp(40px,7vw,96px) clamp(22px,5vw,64px) 96px}
 
   /* ---------- Masthead ---------- */
   .mast{position:relative;margin-bottom:clamp(40px,6vw,72px)}
@@ -142,7 +142,8 @@
 
   /* week ruler */
   .ruler{position:relative;height:34px;margin-top:12px}
-  .tick{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px}
+  .tick{position:absolute;top:0;transform:translateX(-50%) translateY(-7px);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;transition:opacity .45s var(--ease), transform .45s var(--ease)}
+  .tick.shown{opacity:1;transform:translateX(-50%) translateY(0)}
   .tick i{display:block;width:1px;height:9px;background:var(--line)}
   .tick span{font-size:10.5px;font-weight:600;letter-spacing:.06em;color:var(--ink-faint);font-variant-numeric:tabular-nums}
   .tick.edge i{height:13px;background:var(--ink-faint)}
@@ -280,7 +281,7 @@
       { when:'Weeks 13–14', what:'<strong>Existing custom features:</strong> Do Not Knock Registry, Form/survey builder, Reflective sign orders, Food Truck Registry, Alert Avon Lake' },
       { when:'Weeks 15–16', what:'<strong>New custom features:</strong> Registered contractors, Live Video, Calendar, Program and Facility Reservations, Finance Reporting' },
     ]},
-    { weeks:'Weeks 17–20', span:4, title:'Dynamic Content Migration & Launch Prep', items:[
+    { weeks:'Weeks 17–20', span:4, title:'Dynamic Content & Launch Prep', items:[
       { when:'Weeks 17–18', what:'<strong>Dynamic content migration:</strong> News archives, agendas/minutes, Calendar, Parks Events' },
       { when:'Weeks 19–20', what:'<strong>Launch prep:</strong> QA, training, redirects, set up Google Analytics' },
     ]},
@@ -361,6 +362,10 @@
     hideAllBtn.disabled = revealed === 0;
     nextBtn.disabled = revealed >= phases.length;
     showAllBtn.disabled = revealed >= phases.length;
+    // bring in week ticks as cards appear (each card adds its right-edge tick)
+    [...ruler.children].forEach((el,t)=>{
+      el.classList.toggle('shown', revealed > 0 && t <= revealed);
+    });
     // close detail if its block is no longer visible
     if(active !== null && active >= revealed) setActive(null);
   }
