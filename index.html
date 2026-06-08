@@ -194,10 +194,12 @@
   footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12px;letter-spacing:.06em;color:var(--ink-faint);text-transform:uppercase;font-weight:600}
   footer .logo{height:46px;width:auto;display:block;background:#fff;padding:8px 14px;border-radius:10px;box-shadow:0 1px 3px rgba(16,48,46,.1)}
   .foot-left{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .foot-left .dot{opacity:.45}
   .datebox{display:inline-flex;align-items:center;gap:8px}
-  .datelink{font:inherit;letter-spacing:inherit;text-transform:uppercase;color:var(--copper);background:none;border:0;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--copper) 45%,transparent)}
-  .datelink:hover{text-decoration-color:var(--copper)}
+  .datebox .dot{color:color-mix(in srgb,var(--ink) 13%,var(--paper));transition:color .25s var(--ease)}
+  .datebox.has-date .dot{color:var(--ink-faint)}
+  .datelink{font:inherit;letter-spacing:inherit;text-transform:uppercase;color:color-mix(in srgb,var(--ink) 13%,var(--paper));background:none;border:0;cursor:pointer;padding:0;text-decoration:none;transition:color .25s var(--ease)}
+  .datelink:hover{color:var(--ink-faint)}
+  .datebox.has-date .datelink{color:var(--copper);text-decoration:underline;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--copper) 45%,transparent)}
   .datelink:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:3px}
   .dateinput{display:none;font-family:"Hanken Grotesk",sans-serif;font-size:12px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
   .datebox.editing .dateinput{display:inline-block}
@@ -255,9 +257,9 @@
     <footer>
       <div class="foot-left">
         <span>Avon Lake, Ohio</span>
-        <span class="dot" aria-hidden="true">·</span>
         <div class="datebox" id="datebox">
-          <button type="button" class="datelink" id="dateLink">Set start date</button>
+          <span class="dot" aria-hidden="true">·</span>
+          <button type="button" class="datelink" id="dateLink">START</button>
           <input type="date" id="dateInput" class="dateinput" aria-label="Project start date">
           <button type="button" class="dateclear" id="dateClear" hidden aria-label="Clear start date">&times;</button>
         </div>
@@ -465,7 +467,8 @@
     if(dateInput.value){
       const [y,m,d] = dateInput.value.split('-').map(Number);
       startDate = new Date(y, m - 1, d);
-      dateLink.textContent = 'Start: ' + fmtDate(startDate);
+      dateLink.textContent = fmtDate(startDate);
+      datebox.classList.add('has-date');
       dateClear.hidden = false;
       datebox.classList.remove('editing');
       renderDates();
@@ -474,7 +477,8 @@
   dateInput.addEventListener('blur', ()=>{ if(!dateInput.value) datebox.classList.remove('editing'); });
   dateClear.addEventListener('click', ()=>{
     startDate = null; dateInput.value = '';
-    dateLink.textContent = 'Set start date';
+    dateLink.textContent = 'START';
+    datebox.classList.remove('has-date');
     dateClear.hidden = true;
     datebox.classList.remove('editing');
     renderDates();
