@@ -47,10 +47,10 @@
     content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.05;mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-  .wrap{max-width:min(1680px,92vw);margin:0 auto;padding:clamp(40px,7vw,96px) clamp(22px,5vw,64px) 96px}
+  .wrap{max-width:min(1680px,92vw);margin:0 auto;padding:clamp(26px,4vw,52px) clamp(22px,5vw,64px) 56px}
 
   /* ---------- Masthead ---------- */
-  .mast{position:relative;margin-bottom:clamp(40px,6vw,72px)}
+  .mast{position:relative;margin-bottom:clamp(18px,2.6vw,30px)}
   .eyebrow{
     display:inline-flex;align-items:center;gap:10px;
     font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
@@ -60,34 +60,18 @@
   .eyebrow::before{content:"";width:34px;height:1px;background:var(--copper)}
   .mast h1{
     font-family:"Fraunces",serif;font-optical-sizing:auto;
-    font-weight:500;font-size:clamp(38px,6.4vw,76px);line-height:.98;letter-spacing:-.02em;
-    margin:18px 0 0;max-width:14ch;
+    font-weight:500;font-size:clamp(28px,4.4vw,56px);line-height:1;letter-spacing:-.02em;
+    margin:9px 0 0;white-space:nowrap;
     opacity:0;animation:rise .9s var(--ease) .12s forwards;
   }
   .mast h1 em{font-style:italic;font-weight:400;color:var(--ink-soft)}
-  .mast .lede{
-    display:flex;flex-wrap:wrap;gap:24px 40px;align-items:baseline;margin-top:26px;
-    opacity:0;animation:rise .9s var(--ease) .2s forwards;
-  }
-  .lede .stat{display:flex;flex-direction:column;gap:2px}
-  .lede .stat b{font-family:"Fraunces",serif;font-size:30px;font-weight:500;line-height:1;color:var(--ink)}
-  .lede .stat span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
-  .lede .rule{flex:1;min-width:60px;height:1px;background:var(--line);align-self:center}
-  .draft{
-    display:inline-flex;align-items:center;gap:10px;
-    font-family:"Fraunces",serif;font-style:italic;font-weight:400;
-    font-size:24px;letter-spacing:.01em;color:var(--copper);
-    padding:8px 22px;border:1px solid color-mix(in srgb,var(--copper) 40%,transparent);
-    border-radius:999px;background:color-mix(in srgb,var(--copper) 7%,transparent);
-  }
-  .draft::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--copper)}
 
   /* ---------- High-level track ---------- */
   .track-shell{
     opacity:0;animation:rise 1s var(--ease) .3s forwards;
-    margin-top:10px;
+    margin-top:0;
   }
-  .track-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+  .track-top{display:flex;justify-content:flex-end;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:10px}
   .track-hint{font-size:12.5px;color:var(--ink-faint);letter-spacing:.04em;display:flex;align-items:center;gap:8px}
   .track-hint svg{width:15px;height:15px;stroke:var(--copper);fill:none;stroke-width:1.6}
   .ctrl{display:inline-flex;gap:7px}
@@ -141,7 +125,7 @@
   .seg.hidden{opacity:0;pointer-events:none;box-shadow:none;transform:translateY(10px) scale(.97);filter:none}
 
   /* week ruler */
-  .ruler{position:relative;height:34px;margin-top:12px}
+  .ruler{position:relative;height:30px;margin-top:8px}
   .tick{position:absolute;top:0;transform:translateX(-50%) translateY(-7px);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;transition:opacity .45s var(--ease), transform .45s var(--ease)}
   .tick.shown{opacity:1;transform:translateX(-50%) translateY(0)}
   .tick i{display:block;width:1px;height:9px;background:var(--line)}
@@ -151,7 +135,7 @@
   /* ---------- Detail panel ---------- */
   .detail-wrap{
     display:grid;grid-template-rows:1fr;
-    margin-top:clamp(34px,5vw,56px);
+    margin-top:clamp(14px,2vw,24px);
     transition:grid-template-rows .55s var(--ease), margin-top .55s var(--ease), opacity .4s var(--ease);
   }
   .detail-wrap.closed{grid-template-rows:0fr;margin-top:0;opacity:0;pointer-events:none}
@@ -159,7 +143,7 @@
     position:relative;min-height:0;
     background:linear-gradient(180deg,#FBF7EE,#F4EEE1);
     border:1px solid var(--line-soft);
-    border-radius:22px;padding:clamp(28px,4vw,48px);
+    border-radius:22px;padding:clamp(20px,2.6vw,32px);
     box-shadow:var(--shadow);
     overflow:hidden;
   }
@@ -183,32 +167,33 @@
   .d-head{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 18px;margin-bottom:6px}
   .d-phase{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent,var(--c1));transition:color .5s var(--ease)}
   .d-weeks{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
-  .d-title{position:relative;font-family:"Fraunces",serif;font-weight:500;font-size:clamp(28px,3.6vw,44px);line-height:1.04;letter-spacing:-.015em;margin:6px 0 30px;max-width:18ch}
+  .d-title{position:relative;font-family:"Fraunces",serif;font-weight:500;font-size:clamp(26px,3.2vw,40px);line-height:1.04;letter-spacing:-.015em;margin:5px 0 16px;max-width:18ch}
 
   .steps{position:relative;list-style:none;display:flex;flex-direction:column;gap:0}
   .step{
     position:relative;display:grid;grid-template-columns:158px 1fr;gap:clamp(16px,3vw,42px);
-    padding:22px 0;border-top:1px solid var(--line-soft);
+    padding:15px 0;border-top:1px solid var(--line-soft);
     opacity:0;transform:translateY(14px);
     animation:rise .6s var(--ease) forwards;animation-delay:calc(.12s + var(--i) * .1s);
   }
   .step:first-of-type{border-top:0}
   .step .when{position:relative;font-family:"Fraunces",serif;font-size:18px;font-weight:500;color:var(--ink);padding-left:26px;white-space:nowrap}
   .step .when::before{content:"";position:absolute;left:0;top:9px;width:11px;height:11px;border-radius:50%;background:var(--accent,var(--c1));box-shadow:0 0 0 4px color-mix(in srgb,var(--accent,var(--c1)) 18%,transparent)}
-  .step .when::after{content:"";position:absolute;left:5px;top:24px;bottom:-22px;width:1px;background:var(--line)}
+  .step .when::after{content:"";position:absolute;left:5px;top:24px;bottom:-15px;width:1px;background:var(--line)}
   .step:last-of-type .when::after{display:none}
   .step .what{font-size:16.5px;line-height:1.55;color:var(--ink-soft);max-width:62ch}
   .step .what strong{color:var(--ink);font-weight:600}
 
   .empty{font-size:16px;color:var(--ink-faint);font-style:italic;padding:8px 0 4px}
 
-  footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12px;letter-spacing:.06em;color:var(--ink-faint);text-transform:uppercase;font-weight:600}
+  footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12px;letter-spacing:.06em;color:var(--ink-faint);text-transform:uppercase;font-weight:600}
   footer .logo{height:46px;width:auto;display:block;background:#fff;padding:8px 14px;border-radius:10px;box-shadow:0 1px 3px rgba(16,48,46,.1)}
 
   @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
   @keyframes grow{from{opacity:0;transform:scaleY(.4) translateY(20px)}to{opacity:1;transform:scaleY(1) translateY(0)}}
 
   @media (max-width:760px){
+    .mast h1{white-space:normal}
     .track{height:auto;flex-direction:column;gap:8px}
     .seg{flex-grow:1 !important;min-height:74px}
     .seg.active{transform:none}
@@ -229,19 +214,12 @@
 <body>
   <div class="wrap">
     <header class="mast">
-      <span class="eyebrow">Project Timeline</span>
-      <h1>Avon Lake City Website Redesign</h1>
-      <div class="lede">
-        <span class="draft">Draft</span>
-      </div>
+      <span class="eyebrow">Draft Project Timeline</span>
+      <h1>Avon Lake City <em>Website Redesign</em></h1>
     </header>
 
     <section class="track-shell" aria-label="High-level timeline. Select a phase to view details.">
       <div class="track-top">
-        <p class="track-hint">
-          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-          Select a phase to expand its details
-        </p>
         <div class="ctrl" role="group" aria-label="Reveal controls">
           <button id="hideAll" type="button">Hide all</button>
           <button id="nextBtn" type="button">Reveal next</button>
@@ -269,7 +247,7 @@
       { when:'Weeks 1–2', what:'Draft Information Architecture, draft navigation structure, set up Tree Testing' },
       { when:'Weeks 3–4', what:'Conduct Tree Testing' },
     ]},
-    { weeks:'Weeks 5–8', span:4, title:'Design & Page Elements', items:[
+    { weeks:'Weeks 5–8', span:4, title:'Design and Page Elements', items:[
       { when:'Weeks 5–6', what:'Build framework: set up WordPress; design visual theme' },
       { when:'Weeks 7–8', what:'Page templates, block library elements, and content review completed' },
     ]},
@@ -281,7 +259,7 @@
       { when:'Weeks 13–14', what:'<strong>Existing custom features:</strong> Do Not Knock Registry, Form/survey builder, Reflective sign orders, Food Truck Registry, Alert Avon Lake' },
       { when:'Weeks 15–16', what:'<strong>New custom features:</strong> Registered contractors, Live Video, Calendar, Program and Facility Reservations, Finance Reporting' },
     ]},
-    { weeks:'Weeks 17–20', span:4, title:'Dynamic Content & Launch Prep', items:[
+    { weeks:'Weeks 17–20', span:4, title:'Dynamic Content and Launch Prep', items:[
       { when:'Weeks 17–18', what:'<strong>Dynamic content migration:</strong> News archives, agendas/minutes, Calendar, Parks Events' },
       { when:'Weeks 19–20', what:'<strong>Launch prep:</strong> QA, training, redirects, set up Google Analytics' },
     ]},
